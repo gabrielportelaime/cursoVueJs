@@ -26,7 +26,7 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" @keyup="imprimirTexto()">
+        <input type="text" @keyup="imprimirTexto($event)">
         <button @click="mensagemAlerta()">Botão</button>
     </div>
     <script>
@@ -34,11 +34,17 @@
             el: '#app', //# = id | . = classe
             data: {
                 mensagem: 'Expressão',
-                estilo: 'azul'
+                estilo: 'azul',
+                inicial: true,
+                anterior: '',
             },
             methods: {
-                imprimirTexto: function(){
-                    console.log(this.estilo);
+                imprimirTexto: function(evento){
+                    if(!this.inicial && this.anterior == evento.key){
+                        alert('Repetido!');
+                    }
+                    this.anterior = evento.key;
+                    this.inicial = false;
                 },
                 mensagemAlerta(){
                     alert('Mensagem de Alerta!');
