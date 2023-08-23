@@ -6,72 +6,40 @@
     <script src="./vue.js"></script>
     <title>Document</title>
     <style>
-        .verde {
-            background-color: green;
-            color: white;
-        }
-        .branco {
-            background-color: white;
-            color: black;
-        }
-        .azul {
-            background-color: blue;
-            color: white;
-        }
-        .vermelho{
-            background-color: red;
-            color: white;
-        }
-        .borda{
-            border: 1px solid;
-        }
-        .div-principal{
-            width: 200px;
-            height: 200px;
-        }
-        .div-comum{
-            width: 50px;
-            height: 50px;
-            display: inline-block;
-        }
     </style>
 </head>
 <body>
     <div id="app">
-        <div class="borda div-principal" :class="cor">
-            Cor: {{cor}}
-            <br>
-            Posição X: {{pos.x}}
-            <br>
-            Posição Y: {{pos.y}}
-        </div>
-        <hr></hr>
-        <div @click="mudarCor('verde')" class="borda div-comum verde"></div>
-        <div @mouseover="mudarCor('azul')" @mouseout="mudarCor('branco')"class="borda div-comum azul"></div>
-        <div @mousemove="coordenadas($event)" class="borda div-comum vermelho"></div>
+        <input type="text" id="email">
+        <br>
+        <select id="opcoes">
+            <option value="1">Opção 1</option>
+            <option value="2">Opção 2</option>
+            <option value="3">Opção 3</option>
+            <option value="4">Opção 4</option>
+        </select>
+        <br>
+        <p id="paragrafo" style="color:red">Parágrafo</p>
+        <br>
+        <div id="bloco" style="color:blue">Texto</div>
+        <button @click="selecionarElementoFilho()">Botão</button>
     </div>
     <script>
         options = {
-            el: '#app', //# = id | . = classe
+            el: '#app',
             data: {
-                cor: 'Branco',
-                pos: {
-                    x: 0,
-                    y: 0,
-                }
+                
             },
             methods: {
-                mudarCor(c){
-                    this.cor = c;
-                },
-                coordenadas(e){
-                    this.pos.x = e.clientX;
-                    this.pos.y = e.clientY;
+                selecionarElementoFilho(){
+                    console.log(email.value);
+                    console.log(opcoes.value);
+                    console.log(paragrafo.style.color);
+                    console.log(bloco.innerHTML);
                 }
             }
         }
-        const vm = new Vue(options) //vm = view model
-        console.log(vm)
+        const vm = new Vue(options)
     </script>
 </body>
 </html>
