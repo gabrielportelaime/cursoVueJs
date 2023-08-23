@@ -7,10 +7,16 @@
     <title>Document</title>
     <style>
         .verde {
-            color: green;
+            background-color: green;
+            color: white;
         }
         .vermelho {
-            color: red;
+            background-color: red;
+            color: white;
+        }
+        .azul {
+            background-color: blue;
+            color: white;
         }
         .negrito{
             font-weight: bold;
@@ -20,19 +26,15 @@
 </head>
 <body>
     <div id="app">
-        <a :href="site">Site</a>
-        <p :class="cor" class="negrito">Conteúdo</p>
-        <input type="text" :placeholder="instrucao">
-        <input type="checkbox" :checked="check">
+        {{mensagem.length}}
+        <input :value="2+2" :class="1 == 2 ? 'verde' : estilo">
     </div>
     <script>
         options = {
             el: '#app', //# = id | . = classe
             data: {
-                site: 'https://jorgesantana.net.br',
-                cor: 'verde',
-                instrucao: 'Diretiva v-bind',
-                check: true,
+                mensagem: 'Expressão',
+                estilo: 'azul'
             },
             methods: {
 
