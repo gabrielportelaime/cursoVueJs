@@ -10,44 +10,63 @@
             background-color: green;
             color: white;
         }
-        .vermelho {
-            background-color: red;
-            color: white;
+        .branco {
+            background-color: white;
+            color: black;
         }
         .azul {
             background-color: blue;
             color: white;
         }
-        .negrito{
-            font-weight: bold;
-            font-size: 25px;
+        .vermelho{
+            background-color: red;
+            color: white;
+        }
+        .borda{
+            border: 1px solid;
+        }
+        .div-principal{
+            width: 200px;
+            height: 200px;
+        }
+        .div-comum{
+            width: 50px;
+            height: 50px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
     <div id="app">
-        <input type="text" @keyup="imprimirTexto($event)">
-        <button @click="mensagemAlerta()">Botão</button>
+        <div class="borda div-principal" :class="cor">
+            Cor: {{cor}}
+            <br>
+            Posição X: {{pos.x}}
+            <br>
+            Posição Y: {{pos.y}}
+        </div>
+        <hr></hr>
+        <div @click="mudarCor('verde')" class="borda div-comum verde"></div>
+        <div @mouseover="mudarCor('azul')" @mouseout="mudarCor('branco')"class="borda div-comum azul"></div>
+        <div @mousemove="coordenadas($event)" class="borda div-comum vermelho"></div>
     </div>
     <script>
         options = {
             el: '#app', //# = id | . = classe
             data: {
-                mensagem: 'Expressão',
-                estilo: 'azul',
-                inicial: true,
-                anterior: '',
+                cor: 'Branco',
+                pos: {
+                    x: 0,
+                    y: 0,
+                }
             },
             methods: {
-                imprimirTexto: function(evento){
-                    if(!this.inicial && this.anterior == evento.key){
-                        alert('Repetido!');
-                    }
-                    this.anterior = evento.key;
-                    this.inicial = false;
+                mudarCor(c){
+                    this.cor = c;
                 },
-                mensagemAlerta(){
-                    alert('Mensagem de Alerta!');
+                coordenadas(e){
+                    this.pos.x = e.clientX;
+                    this.pos.y = e.clientY;
                 }
             }
         }
