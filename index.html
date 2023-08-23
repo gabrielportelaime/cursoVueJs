@@ -5,35 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./vue.js"></script>
     <title>Document</title>
+    <style>
+        .verde {
+            color: green;
+        }
+        .vermelho {
+            color: red;
+        }
+        .negrito{
+            font-weight: bold;
+            font-size: 25px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        {{somar()}}<br>
-        {{subtrair()}}<br>
-        {{multiplicar()}}<br>
-        {{dividir()}}<br>
+        <a :href="site">Site</a>
+        <p :class="cor" class="negrito">Conteúdo</p>
+        <input type="text" :placeholder="instrucao">
+        <input type="checkbox" :checked="check">
     </div>
     <script>
         options = {
             el: '#app', //# = id | . = classe
             data: {
-                n1: 10,
-                n2: 5,
+                site: 'https://jorgesantana.net.br',
+                cor: 'verde',
+                instrucao: 'Diretiva v-bind',
+                check: true,
             },
             methods: {
-                somar: function somar(){//convencional
-                    return this.n1+this.n2;
-                },
-                subtrair: function(){//anônima
-                    return this.n1-this.n2;
-                },
-                multiplicar: () => { //arrow function
-                    //comportamento diferenciado
-                    return this.n1*this.n2;
-                },
-                dividir(){//forma enxuta de definir os pares chaves/valor
-                    return this.n1/this.n2;
-                },
+
             }
         }
         const vm = new Vue(options) //vm = view model
