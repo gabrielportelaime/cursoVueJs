@@ -26,8 +26,8 @@
 </head>
 <body>
     <div id="app">
-        {{mensagem.length}}
-        <input :value="2+2" :class="1 == 2 ? 'verde' : estilo">
+        <input type="text" @keyup="imprimirTexto()">
+        <button @click="mensagemAlerta()">Botão</button>
     </div>
     <script>
         options = {
@@ -37,7 +37,12 @@
                 estilo: 'azul'
             },
             methods: {
-
+                imprimirTexto: function(){
+                    console.log(this.estilo);
+                },
+                mensagemAlerta(){
+                    alert('Mensagem de Alerta!');
+                }
             }
         }
         const vm = new Vue(options) //vm = view model
