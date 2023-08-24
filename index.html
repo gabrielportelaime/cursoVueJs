@@ -10,32 +10,42 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" id="email">
-        <br>
-        <select id="opcoes">
-            <option value="1">Opção 1</option>
-            <option value="2">Opção 2</option>
-            <option value="3">Opção 3</option>
-            <option value="4">Opção 4</option>
-        </select>
-        <br>
-        <p id="paragrafo" style="color:red">Parágrafo</p>
-        <br>
-        <div id="bloco" style="color:blue">Texto</div>
-        <button @click="selecionarElementoFilho()">Botão</button>
+        <!-- v-if simples -->
+        <button @click="exibirSaldo = !exibirSaldo">
+            <span v-if="!exibirSaldo">Exibir saldo</span>
+            <span v-if="exibirSaldo">Ocultar saldo</span>
+        </button>
+        <p>Saldo: <span v-if="exibirSaldo">R$ {{saldo}}</span></p>
+        <hr>
+
+        <!-- v-if e v-else -->
+        Idade: <input type="text" id="inputIdade" @blur="setIdade()">
+        <p v-if="idade < 18">Menor de idade!</p>
+        <p v-else>Maior de idade</p>
+
+        <!-- v-if e v-else-if e v-else -->
+        Nota: <input type="text" id="inputNota" @blur="setNota()">
+        <p v-if="nota == ''">Digite uma nota</p>
+        <p v-else-if="nota >= 7 && nota <= 10">Aprovado</p>
+        <p v-else-if="nota >= 5 && nota < 7">Recuperação</p>
+        <p v-else-if="nota >= 0 && nota < 5">Reprovado</p>
+        <p v-else>Nota Inválida!</p>
     </div>
     <script>
         options = {
             el: '#app',
             data: {
-                
+                saldo: 4930.12,
+                exibirSaldo: false,
+                idade: 0,
+                nota: 0,
             },
             methods: {
-                selecionarElementoFilho(){
-                    console.log(email.value);
-                    console.log(opcoes.value);
-                    console.log(paragrafo.style.color);
-                    console.log(bloco.innerHTML);
+                setIdade(){
+                    this.idade = inputIdade.value
+                },
+                setNota(){
+                    this.nota = inputNota.value
                 }
             }
         }
