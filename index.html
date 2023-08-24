@@ -10,25 +10,43 @@
 </head>
 <body>
     <div id="app">
-        <p v-once>Saldo inicial: {{saldo}}</p>
-        <p>Saldo atualizado: {{saldo}}</p>
-        <input type="text" id="valor">
-        <button @click="creditar()">Creditar</button>
-        <button @click="debitar()">Debitar</button>
+        <ul>
+            <li v-for="(curso, chave) in usuario.cursos" v-text="(chave + 1) + ' - ' + curso"></li>
+        </ul>
+        <hr>
+        <table border="5px">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(curso, chave) in usuario.certificados">
+                    <td>{{chave}}</td>
+                    <td>{{curso.titulo}}</td>
+                    <td>{{curso.descricao}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <script>
         options = {
             el: '#app',
             data: {
-                saldo: 1100,
+                usuario:{
+                    nome: 'Gabriel',
+                    cursos: ['Laravel', 'VueJS', 'Angular', 'React'],
+                    certificados: {
+                        1000: {titulo: 'Laravel', descricao: 'Domine o framework Laravel'},
+                        1001: {titulo: 'Banco de dados', descricao: 'Domine Banco de dados'},
+                        1002: {titulo: 'VueJs', descricao: 'Aprenda sobre o melhor framework de front-end'},
+                    },
+                },
             },
             methods: {
-                creditar(){
-                    this.saldo += parseFloat(valor.value)
-                },
-                debitar(){
-                    this.saldo -= parseFloat(valor.value)
-                }
+
             }
         }
         const vm = new Vue(options)
