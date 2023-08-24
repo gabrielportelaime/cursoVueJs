@@ -10,50 +10,47 @@
 </head>
 <body>
     <div id="app">
-        <h4>Adicionar Pacientes</h4>
-        <span>Nome: </span><input type="text" id="inputNome"><br>
-        <span>Idade: </span><input type="text" id="inputIdade"><br>
-        <span>Plano: </span><input type="text" id="inputPlano"><br>
-        <button @click="adicionarPaciente()">Adicionar</button>
+        {{paciente}}<br>
+        <!-- <input type="text" :value="paciente" @keyup="paciente = $event.target.value"> -->
+        <input type="text" v-model="paciente">
         <hr>
-        <h4>Último paciente cadastrado:</h4>
-        <p v-if="pacientes.length > 0">
-            {{ultimoPaciente}}
-        </p>
+        <input type="radio" name="sexo" v-model="sexo" value="M">Masculino
+        <input type="radio" name="sexo" v-model="sexo" value="F">Feminino
+        <br>
+        {{sexo}}
         <hr>
-        <h4>Plano Ouro</h4>
-        <p v-for="p in pacientesOuro">{{p.nome}}</p>
+        <select v-model="plano">
+            <option value="" disabled>Selecione o plano</option>
+            <option value="1">Básico</option>
+            <option value="2">Diamante</option>
+            <option value="3">Ouro</option>
+            <option value="4">Prata</option>
+        </select>
+        {{plano}}
         <hr>
-        <h4>Pacientes Cadastrados</h4>
-        <p v-for="p in pacientes">{{p.nome}}</p>
+        <input type="checkbox" value="100" v-model="doencas">Asma
+        <input type="checkbox" value="101" v-model="doencas">Diabetes
+        <input type="checkbox" value="102" v-model="doencas">Rinite
+        <br>
+        {{doencas}}
+        <hr>
+        <textarea v-model="diagnostico" cols="80" rows="10"></textarea>
+        <br>
+        {{diagnostico}}
     </div>
     <script>
         options = {
             el: '#app',
             data: {
-                pacientes: []
+                paciente: 'João da Silva',
+                sexo: '',
+                plano: '',
+                doencas: [],
+                diagnostico: '',
             },
             methods: {
-                adicionarPaciente(){
-                    this.pacientes.push({
-                            nome: inputNome.value,
-                            idade: inputIdade.value,
-                            plano: inputPlano.value
-                        })
-                }
             },
             computed: {
-                ultimoPaciente(){
-                    let key = this.pacientes.length - 1
-                    let txt = ''
-                    txt += 'Paciente: ' + this.pacientes[key].nome + ', '
-                    txt += 'Idade: ' + this.pacientes[key].idade + ', '
-                    txt += 'Plano: ' + this.pacientes[key].plano
-                    return txt.toUpperCase()
-                },
-                pacientesOuro(){
-                    return this.pacientes.filter(p => p.plano == 'Ouro')
-                }
             }
         }
         const vm = new Vue(options)
