@@ -6,6 +6,11 @@
     <script src="./vue.js"></script>
     <title>Document</title>
     <style>
+        .publicacao{
+            border: solid 1px; 
+            margin: 10px; 
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
@@ -30,6 +35,17 @@
                 </tr>
             </tbody>
         </table>
+        <hr>
+        <ul>
+            <li v-for="publicacao in usuario.publicacoes" class="publicacao" :key="publicacao.id">
+                <div>
+                    {{publicacao.publicacao}}
+                    <hr>
+                    <input type="text">
+                </div>
+            </li>
+        </ul>
+        <button @click="misturarArray()">Misturar publicações</button>
     </div>
     <script>
         options = {
@@ -43,10 +59,23 @@
                         1001: {titulo: 'Banco de dados', descricao: 'Domine Banco de dados'},
                         1002: {titulo: 'VueJs', descricao: 'Aprenda sobre o melhor framework de front-end'},
                     },
+                    publicacoes: [
+                        {id: 1, publicacao: 'Publicacao 1'},
+                        {id: 2, publicacao: 'Publicacao 2'},
+                        {id: 3, publicacao: 'Publicacao 3'},
+                        {id: 4, publicacao: 'Publicacao 4'},
+                    ],
                 },
             },
             methods: {
-
+                misturarArray(){
+                    let misturado = []
+                    misturado[0] = this.usuario.publicacoes[3];
+                    misturado[1] = this.usuario.publicacoes[0];
+                    misturado[2] = this.usuario.publicacoes[1];
+                    misturado[3] = this.usuario.publicacoes[2];
+                    this.usuario.publicacoes = misturado
+                }
             }
         }
         const vm = new Vue(options)
