@@ -13,7 +13,7 @@
         <span>Paciente: </span><input type="text" v-model="paciente">
         <br>
         <ul>
-            <li v-for="paciente in lista">{{paciente.nome}} - {{paciente.idade}}</li>
+            <li v-for="item in lista">{{item.nome}}</li>
         </ul>
     </div>
     <script>
@@ -28,8 +28,9 @@
                     {nome: 'Gabriel Lucas', idade: 26},
                     {nome: 'Julho Nogueira', idade: 22},
                     {nome: 'Jorge Palmeira', idade: 42},
-                    {nome: 'Jorge Palmeira', idade: 42},
-                ]
+                    {nome: 'Juliana Dantas', idade: 42},
+                ],
+                lista: []
             },
             methods: {
             },
@@ -38,8 +39,12 @@
             watch: {
                 //observar o comportamento do atributo paciente
                 paciente(valorNovo){
+                    valorNovo = valorNovo.toLowerCase()   
+                    valorNovo = valorNovo.replace('ú','u')
+                    valorNovo = valorNovo.replace('ã','a')
                     console.log(valorNovo)
-                    this.lista = this.pacientes.filter(p => p.nome.toLowerCase().match(valorNovo.toLowerCase()))
+                    this.lista = this.pacientes.filter(p => p.nome.toLowerCase().replace('ú','u').replace('ã','a').match(valorNovo))
+                    console.log(lista)
                 }
             }
         }
