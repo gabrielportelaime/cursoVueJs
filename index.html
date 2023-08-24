@@ -10,22 +10,50 @@
 </head>
 <body>
     <div id="app">
-        <template v-if="saudacao">
-            <h1>Seja bem vindo</h1> 
-            <p>Exemplo de conteudo da tag <strong>template</strong></p>
-        </template>
-        <template v-for="n in 10">
-            <p>2 x {{n}} = {{n*2}}</p>
-        </template>
+        <h4>Adicionar Pacientes</h4>
+        <span>Nome: </span><input type="text" id="inputNome"><br>
+        <span>Idade: </span><input type="text" id="inputIdade"><br>
+        <span>Plano: </span><input type="text" id="inputPlano"><br>
+        <button @click="adicionarPaciente()">Adicionar</button>
+        <hr>
+        <h4>Último paciente cadastrado:</h4>
+        <p v-if="pacientes.length > 0">
+            {{ultimoPaciente}}
+        </p>
+        <hr>
+        <h4>Plano Ouro</h4>
+        <p v-for="p in pacientesOuro">{{p.nome}}</p>
+        <hr>
+        <h4>Pacientes Cadastrados</h4>
+        <p v-for="p in pacientes">{{p.nome}}</p>
     </div>
     <script>
         options = {
             el: '#app',
             data: {
-                saudacao: true,
+                pacientes: []
             },
             methods: {
-
+                adicionarPaciente(){
+                    this.pacientes.push({
+                            nome: inputNome.value,
+                            idade: inputIdade.value,
+                            plano: inputPlano.value
+                        })
+                }
+            },
+            computed: {
+                ultimoPaciente(){
+                    let key = this.pacientes.length - 1
+                    let txt = ''
+                    txt += 'Paciente: ' + this.pacientes[key].nome + ', '
+                    txt += 'Idade: ' + this.pacientes[key].idade + ', '
+                    txt += 'Plano: ' + this.pacientes[key].plano
+                    return txt.toUpperCase()
+                },
+                pacientesOuro(){
+                    return this.pacientes.filter(p => p.plano == 'Ouro')
+                }
             }
         }
         const vm = new Vue(options)
