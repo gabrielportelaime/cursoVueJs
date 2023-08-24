@@ -16,6 +16,21 @@
 <body>
     <div id="app">
         <ul>
+            <li v-for="n in numero">
+                {{n}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="c in comentarios">
+                {{c.id}} - {{c.comentario}}
+            </li>
+        </ul>
+        <button @click="adicionarElemento()">Adicionar</button>
+        <button @click="removerElemento()">Remover</button>
+        <button @click="modificarElemento()">Atualizar</button>
+        <hr>
+        <ul>
             <li v-for="(curso, chave) in usuario.cursos" v-text="(chave + 1) + ' - ' + curso"></li>
         </ul>
         <hr>
@@ -51,6 +66,13 @@
         options = {
             el: '#app',
             data: {
+                numero: 5,
+                comentarios: [
+                    {id: 1, comentario: 'Comentario 1'},
+                    {id: 2, comentario: 'Comentario 2'},
+                    {id: 3, comentario: 'Comentario 3'},
+                    {id: 4, comentario: 'Comentario 4'},
+                ],
                 usuario:{
                     nome: 'Gabriel',
                     cursos: ['Laravel', 'VueJS', 'Angular', 'React'],
@@ -75,6 +97,17 @@
                     misturado[2] = this.usuario.publicacoes[1];
                     misturado[3] = this.usuario.publicacoes[2];
                     this.usuario.publicacoes = misturado
+                },
+                adicionarElemento(){
+                    // this.comentarios[3] = {id: 5, comentario: 'Comentario 5'}
+                    this.comentarios.push({id: 5, comentario: 'Novo comentário'})
+                },
+                removerElemento(){
+                    // this.comentarios[3] = {id: 5, comentario: 'Comentario 5'}
+                    this.comentarios.pop()
+                },
+                modificarElemento(){
+                    this.$set(this.comentarios, 1, {id: 2, comentario: 'Comentário atualizado!'})
                 }
             }
         }
