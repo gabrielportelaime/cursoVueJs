@@ -10,47 +10,37 @@
 </head>
 <body>
     <div id="app">
-        {{paciente}}<br>
-        <!-- <input type="text" :value="paciente" @keyup="paciente = $event.target.value"> -->
-        <input type="text" v-model="paciente">
-        <hr>
-        <input type="radio" name="sexo" v-model="sexo" value="M">Masculino
-        <input type="radio" name="sexo" v-model="sexo" value="F">Feminino
+        <span>Paciente: </span><input type="text" v-model="paciente">
         <br>
-        {{sexo}}
-        <hr>
-        <select v-model="plano">
-            <option value="" disabled>Selecione o plano</option>
-            <option value="1">Básico</option>
-            <option value="2">Diamante</option>
-            <option value="3">Ouro</option>
-            <option value="4">Prata</option>
-        </select>
-        {{plano}}
-        <hr>
-        <input type="checkbox" value="100" v-model="doencas">Asma
-        <input type="checkbox" value="101" v-model="doencas">Diabetes
-        <input type="checkbox" value="102" v-model="doencas">Rinite
-        <br>
-        {{doencas}}
-        <hr>
-        <textarea v-model="diagnostico" cols="80" rows="10"></textarea>
-        <br>
-        {{diagnostico}}
+        <ul>
+            <li v-for="paciente in lista">{{paciente.nome}} - {{paciente.idade}}</li>
+        </ul>
     </div>
     <script>
         options = {
             el: '#app',
             data: {
-                paciente: 'João da Silva',
-                sexo: '',
-                plano: '',
-                doencas: [],
-                diagnostico: '',
+                paciente: '',
+                pacientes: [
+                    {nome: 'João Nascimento', idade: 32},
+                    {nome: 'José da Silva', idade: 12},
+                    {nome: 'Júnior Silva', idade: 20},
+                    {nome: 'Gabriel Lucas', idade: 26},
+                    {nome: 'Julho Nogueira', idade: 22},
+                    {nome: 'Jorge Palmeira', idade: 42},
+                    {nome: 'Jorge Palmeira', idade: 42},
+                ]
             },
             methods: {
             },
             computed: {
+            },
+            watch: {
+                //observar o comportamento do atributo paciente
+                paciente(valorNovo){
+                    console.log(valorNovo)
+                    this.lista = this.pacientes.filter(p => p.nome.toLowerCase().match(valorNovo.toLowerCase()))
+                }
             }
         }
         const vm = new Vue(options)
