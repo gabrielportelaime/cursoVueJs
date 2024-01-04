@@ -18,7 +18,7 @@
     </div>
     <script>
         options = {
-            el: '#app',
+            el: '#app', //# para selecionar por id | . para selecionar por classe
             data: {
                 paciente: '',
                 pacientes: [
@@ -28,7 +28,12 @@
                     {nome: 'Gabriel Lucas', idade: 26},
                     {nome: 'Julho Nogueira', idade: 22},
                     {nome: 'Jorge Palmeira', idade: 42},
-                    {nome: 'Juliana Dantas', idade: 42},
+                    {nome: 'Juliana Dantas', idade: 21},
+                    {nome: 'Gabriel Dantas', idade: 45},
+                    {nome: 'Lucas Ferreira', idade: 77},
+                    {nome: 'Andrei Mariano', idade: 22},
+                    {nome: 'Pedro Santana', idade: 15},
+                    {nome: 'Enzo Gomes', idade: 8},
                 ],
                 lista: []
             },
@@ -49,6 +54,7 @@
             }
         }
         const vm = new Vue(options)
+        console.log(vm)
     </script>
 </body>
 </html>
