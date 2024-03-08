@@ -16,19 +16,13 @@
             <li v-for="item in lista">{{item.nome}}</li>
         </ul>
         <div>
-            {{somar()}}<br>
-            {{subtrair()}}<br>
-            {{multiplicar()}}<br>
-            {{dividir()}}<br>
-            {{aleatorio()}}<br>
+            Selecionados: {{ lista.length }}<br><br>
         </div>
     </div>
     <script>
         options = {
             el: '#app', //# para selecionar por id | . para selecionar por classe
             data: {
-                n1: 11,
-                n2: 5,
                 paciente: '',
                 pacientes: [
                     {nome: 'João Nascimento', idade: 32},
@@ -48,21 +42,6 @@
                 lista: []
             },
             methods: {
-                somar(){
-                    return this.n1 + this.n2
-                },
-                subtrair(){
-                    return this.n1 - this.n2
-                },
-                multiplicar(){
-                    return this.n1*this.n2
-                },
-                dividir(){
-                    return this.n1/this.n2
-                },
-                aleatorio(){
-                    return Math.floor(Math.random()*100)
-                }
             },
             computed: {
             },
