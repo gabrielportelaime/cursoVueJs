@@ -6,17 +6,61 @@
     <script src="./vue.js"></script>
     <title>Document</title>
     <style>
+        .verde {
+            background-color: green
+        }
+        .branco {
+            background-color: white
+        }
+        .azul {
+            background-color: blue
+        }
+        .vermelho {
+            background-color: red
+        }
+        .div-principal{
+            border: solid 1px;
+            height: 200px;
+            width: 200px;
+        }
+        .div-comum{
+            border: solid 1px;
+            height: 80px;
+            width: 80px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
     <div id="app">
-        <span>Paciente: </span><input type="text" v-model="paciente">
+        <div class="div-principal" :class="cor">
+            Cor: {{ cor }}
+            <br>
+            Posição X do mouse: {{posicaoX}}
+            Posição Y do mouse: {{posicaoY}}
+        </div>
+        <hr>
+        <div class="div-comum verde" @click="mudarCor('verde')"></div>
+        <div 
+            class="div-comum azul" 
+            @mouseover="mudarCor('azul')" 
+            @mouseout="mudarCor('branco')">
+        </div>
+        <div class="div-comum" 
+            @mousemove="coordenadas($event)" 
+            @mouseover="mudarCor('vermelho')"
+            @mouseout="zerarCoordenadas()">    
+        </div>
+        <hr>
+        <span>Paciente: </span>
+        <input type="text" v-model="paciente">
+        <button @click="limparPaciente()">Limpar</button>
         <br>
         <ul>
             <li v-for="item in lista">{{item.nome}}</li>
         </ul>
         <div>
-            Selecionados: {{ lista.length }}<br><br>
+            Selecionados: {{ lista.length }}
         </div>
     </div>
     <script>
@@ -39,9 +83,27 @@
                     {nome: 'Enzo Gomes', idade: 8},
                     {nome: 'Alan Gonzaga', idade: 32},
                 ],
-                lista: []
+                lista: [],
+                cor: 'branco',
+                posicaoX: 0,
+                posicaoY: 0,
             },
             methods: {
+                limparPaciente(){
+                    this.paciente = ''
+                },
+                mudarCor(cor){
+                    this.cor = cor
+                },
+                coordenadas(evento){
+                    this.posicaoX = evento.clientX
+                    this.posicaoY = evento.clientY
+                },
+                zerarCoordenadas(){
+                    this.posicaoX = 0
+                    this.posicaoY = 0
+                    this.cor = 'branco'
+                }
             },
             computed: {
             },
