@@ -62,6 +62,9 @@
         <div>
             Selecionados: {{ lista.length }}
         </div>
+        <hr>
+        <input type="text" @keyup.enter="capturarTecla($event)">
+        <p> {{ teclas }} </p>
     </div>
     <script>
         options = {
@@ -87,6 +90,7 @@
                 cor: 'branco',
                 posicaoX: 0,
                 posicaoY: 0,
+                teclas: ''
             },
             methods: {
                 limparPaciente(){
@@ -103,6 +107,9 @@
                     this.posicaoX = 0
                     this.posicaoY = 0
                     this.cor = 'branco'
+                },
+                capturarTecla(evento){
+                    this.teclas += evento.key
                 }
             },
             computed: {
