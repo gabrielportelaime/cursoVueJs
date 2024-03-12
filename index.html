@@ -29,6 +29,10 @@
             width: 80px;
             display: inline-block;
         }
+        .comum{
+            border: solid 1px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -63,8 +67,46 @@
             Selecionados: {{ lista.length }}
         </div>
         <hr>
-        <input type="text" @keyup.enter="capturarTecla($event)">
+        <input type="text" @keyup="capturarTecla($event)">
         <p> {{ teclas }} </p>
+        <hr>
+        <div class="comum">
+            <select id="opcoes">
+                <option value="A">Opção A</option>
+                <option value="B">Opção B</option>
+                <option value="C">Opção C</option>
+            </select>
+            <button @click="selecionarElemento()">Selecionar</button>
+        </div>
+        <hr>
+        <p v-once>Saldo Inicial: <span v-if="exibirSaldo">R$ {{ saldo }}</span></p>
+        <p>Saldo: <span v-if="exibirSaldo">R$ {{ saldo }}</span></p>
+        <button @click="exibirSaldo = !exibirSaldo">
+            <span>
+                {{ exibirSaldo ? 'Ocultar Saldo' : 'Exibir Saldo' }}
+            </span>
+        </button>
+        <button @click="creditarSaldo()">Creditar</button>
+        <button @click="debitarSaldo()">Debitar</button>
+        <hr>
+        Idade: <input type="text" id="inputIdade" @blur="setIdade()">
+        <p v-if="idade > 17">De maior</p>
+        <p v-else-if="idade < 18 && idade > 0">De menor</p>
+        <!-- <div v-if="idade > 0">
+            <p v-if="idade < 18">Menor de idade</p>
+            <p v-else="idade < 18">Maior de idade</p>
+        </div> -->
+        <hr>
+        <!-- <div class="comum" @click="exibirTextoAjuda = !exibirTextoAjuda"> -->
+        <div class="comum" @mouseover="exibirTextoAjuda = true" @mouseout="exibirTextoAjuda = false">
+            Exemplo ToolTip
+            <div v-show="exibirTextoAjuda">
+                <h3>Ajuda</h3>
+                <p>Texto de ajuda</p>
+            </div>
+        </div>
+        <hr>
+        <div v-html="elementosHTML">Texto de <b>exemplo</b></div>
     </div>
     <script>
         options = {
@@ -90,7 +132,12 @@
                 cor: 'branco',
                 posicaoX: 0,
                 posicaoY: 0,
-                teclas: ''
+                teclas: '',
+                saldo: 1450.32,
+                exibirSaldo: true,
+                idade: 0,
+                exibirTextoAjuda: false,
+                elementosHTML: '<p><b>Site</b></p><a href="https://google.com">Google</a>'
             },
             methods: {
                 limparPaciente(){
@@ -110,6 +157,20 @@
                 },
                 capturarTecla(evento){
                     this.teclas += evento.key
+                }, 
+                selecionarElemento(){
+                    console.log(opcoes.value)
+                },
+                setIdade(){
+                    this.idade = parseInt(inputIdade.value)
+                },
+                debitarSaldo(){
+                    this.saldo -= 100
+                    this.saldo = this.saldo.toFixed(2)
+                },
+                creditarSaldo(){
+                    this.saldo += 100
+                    this.saldo = this.saldo.toFixed(2)
                 }
             },
             computed: {
