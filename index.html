@@ -61,7 +61,7 @@
         <button @click="limparPaciente()">Limpar</button>
         <br>
         <ul>
-            <li v-for="item in lista">{{item.nome}}</li>
+            <li v-for="item in lista" v-text="item.nome"></li>
         </ul>
         <div>
             Selecionados: {{ lista.length }}
@@ -166,11 +166,9 @@
                 },
                 debitarSaldo(){
                     this.saldo -= 100
-                    this.saldo = this.saldo.toFixed(2)
                 },
                 creditarSaldo(){
                     this.saldo += 100
-                    this.saldo = this.saldo.toFixed(2)
                 }
             },
             computed: {
