@@ -124,6 +124,17 @@
                 </tr>
             </tbody>
         </table>
+        <hr>
+        <ul>
+            <li v-for="p in publicacoes" style="border: solid 1px; margin-bottom: 10px;" :key="p.id">
+                <div>
+                    {{p.titulo}}
+                    <hr>
+                    <input type="text">
+                </div>
+            </li>
+        </ul>
+        <button @click="musturarArray()">Misturar publicações</button>
     </div>
     <script>
         options = {
@@ -155,6 +166,12 @@
                 idade: 0,
                 exibirTextoAjuda: false,
                 elementosHTML: '<p><b>Site</b></p><a href="https://google.com">Google</a>',
+                publicacoes: [
+                    {id:1, titulo: 'Publicação 1'},
+                    {id:2, titulo: 'Publicação 2'},
+                    {id:3, titulo: 'Publicação 3'},
+                    {id:4, titulo: 'Publicação 4'},
+                ],
                 cursos: {
                     100: {
                         titulo: 'Laravel',
@@ -196,6 +213,9 @@
                 },
                 creditarSaldo(){
                     this.saldo += 100
+                },
+                musturarArray(){
+                    this.publicacoes = this.publicacoes.sort(() => Math.random() - 0.5)
                 }
             },
             computed: {
