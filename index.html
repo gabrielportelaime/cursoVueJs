@@ -142,9 +142,6 @@
         </ul>
         <button @click="musturarArray()">Misturar publicações</button>
         <hr>
-        <ul>
-            <li v-for="c in comentarios"></li>
-        </ul>
     </div>
     <script>
         options = {
@@ -177,7 +174,7 @@
                 exibirTextoAjuda: false,
                 elementosHTML: '<p><b>Site</b></p><a href="https://google.com">Google</a>',
                 publicacoes: [
-                    {id:1, titulo: 'Publicação 1', comentarios: ['teste']},
+                    {id:1, titulo: 'Publicação 1', comentarios: ['Teste inicial']},
                     {id:2, titulo: 'Publicação 2', comentarios: []},
                     {id:3, titulo: 'Publicação 3', comentarios: []},
                     {id:4, titulo: 'Publicação 4', comentarios: []},
@@ -229,8 +226,8 @@
                     this.publicacoes = this.publicacoes.sort(() => Math.random() - 0.5)
                 },
                 adicionarComentario(id){
-                    this.publicacoes[id].comentarios.append('aa')
-                    console.log(publicacoes)
+                    this.publicacoes[id - 1].comentarios.push(inputComentario[id-1].value)
+                    inputComentario[id-1].value = ""
                 }
             },
             computed: {
