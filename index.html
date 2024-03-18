@@ -107,6 +107,23 @@
         </div>
         <hr>
         <div v-html="elementosHTML">Texto de <b>exemplo</b></div>
+        <hr>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(curso, chave) in cursos">
+                    <td>{{chave}}</td>
+                    <td>{{curso.titulo}}</td>
+                    <td>{{curso.descricao}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <script>
         options = {
@@ -137,7 +154,17 @@
                 exibirSaldo: true,
                 idade: 0,
                 exibirTextoAjuda: false,
-                elementosHTML: '<p><b>Site</b></p><a href="https://google.com">Google</a>'
+                elementosHTML: '<p><b>Site</b></p><a href="https://google.com">Google</a>',
+                cursos: {
+                    100: {
+                        titulo: 'Laravel',
+                        descricao: 'Curso de Laravel pra quem está aprendendo.'
+                    },
+                    101: {
+                        titulo: 'Banco de dados',
+                        descricao: 'Melhor curso de banco de dados.'
+                    }
+                }
             },
             methods: {
                 limparPaciente(){
