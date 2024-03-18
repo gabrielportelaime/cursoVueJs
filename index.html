@@ -130,11 +130,21 @@
                 <div>
                     {{p.titulo}}
                     <hr>
-                    <input type="text">
+                    <div v-if="p.comentarios.length > 0">
+                        <ul>
+                            <li v-for="c in p.comentarios">{{c}}</li>
+                        </ul>
+                    </div>
+                    <input id="inputComentario" type="text" @keyup.enter="adicionarComentario(p.id)">
+                    <button @click="adicionarComentario(p.id)">Comentar</button>
                 </div>
             </li>
         </ul>
         <button @click="musturarArray()">Misturar publicações</button>
+        <hr>
+        <ul>
+            <li v-for="c in comentarios"></li>
+        </ul>
     </div>
     <script>
         options = {
@@ -167,10 +177,10 @@
                 exibirTextoAjuda: false,
                 elementosHTML: '<p><b>Site</b></p><a href="https://google.com">Google</a>',
                 publicacoes: [
-                    {id:1, titulo: 'Publicação 1'},
-                    {id:2, titulo: 'Publicação 2'},
-                    {id:3, titulo: 'Publicação 3'},
-                    {id:4, titulo: 'Publicação 4'},
+                    {id:1, titulo: 'Publicação 1', comentarios: ['teste']},
+                    {id:2, titulo: 'Publicação 2', comentarios: []},
+                    {id:3, titulo: 'Publicação 3', comentarios: []},
+                    {id:4, titulo: 'Publicação 4', comentarios: []},
                 ],
                 cursos: {
                     100: {
@@ -181,7 +191,8 @@
                         titulo: 'Banco de dados',
                         descricao: 'Melhor curso de banco de dados.'
                     }
-                }
+                },
+                
             },
             methods: {
                 limparPaciente(){
@@ -216,6 +227,10 @@
                 },
                 musturarArray(){
                     this.publicacoes = this.publicacoes.sort(() => Math.random() - 0.5)
+                },
+                adicionarComentario(id){
+                    this.publicacoes[id].comentarios.append('aa')
+                    console.log(publicacoes)
                 }
             },
             computed: {
