@@ -56,9 +56,8 @@
             @mouseout="zerarCoordenadas()">    
         </div>
         <hr>
-        <span>Paciente: </span>
+        <span>Pesquisar paciente: </span>
         <input type="text" v-model="paciente">
-        <button @click="limparPaciente()">Limpar</button>
         <br>
         <ul>
             <li v-for="item in lista" v-text="item.nome"></li>
@@ -66,6 +65,15 @@
         <div>
             Selecionados: {{ lista.length }}
         </div>
+        <hr>
+        <span>Adicionar paciente:</span>
+        <br>
+        <span>Nome do paciente:</span>
+        <input type="text" id="nomePaciente">
+        <br>
+        <span>Idade do paciente: </span>
+        <input type="text" id="idadePaciente">
+        <button @click="adicionarPaciente()">Adicionar Paciente</button>
         <hr>
         <input type="text" @keyup="capturarTecla($event)">
         <p> {{ teclas }} </p>
@@ -142,6 +150,16 @@
         </ul>
         <button @click="musturarArray()">Misturar publicações</button>
         <hr>
+        <!-- Tag template serve para criar elementos que não aparecerão na f12 -->
+        <template v-if="saudacao">
+            <h1>Boas-vindas</h1>
+            <p>Conteúdo da tag <strong>template</strong></p>
+        </template>
+        <hr>
+        <h1>Tabuada do 2</h1>
+        <template v-for="n in 10">
+            <p> 2 x {{n}} = <strong>{{2*n}}</strong></p>
+        </template>
     </div>
     <script>
         options = {
@@ -189,7 +207,7 @@
                         descricao: 'Melhor curso de banco de dados.'
                     }
                 },
-                
+                saudacao: true,
             },
             methods: {
                 limparPaciente(){
@@ -228,6 +246,15 @@
                 adicionarComentario(id){
                     this.publicacoes[id - 1].comentarios.push(inputComentario[id-1].value)
                     inputComentario[id-1].value = ""
+                },
+                adicionarPaciente(){
+                    var nome = nomePaciente.value
+                    var idade = idadePaciente.value
+                    if(nome != "" && idade != ""){
+                        this.pacientes.push({nome: nome, idade: parseInt(idade)})
+                    }else{
+                        alert("Dados do paciente incompletos!")
+                    }
                 }
             },
             computed: {
@@ -238,9 +265,7 @@
                     valorNovo = valorNovo.toLowerCase()   
                     valorNovo = valorNovo.replace('ú','u')
                     valorNovo = valorNovo.replace('ã','a')
-                    console.log(valorNovo)
                     this.lista = this.pacientes.filter(p => p.nome.toLowerCase().replace('ú','u').replace('ã','a').match(valorNovo))
-                    console.log(lista)
                 }
             }
         }
