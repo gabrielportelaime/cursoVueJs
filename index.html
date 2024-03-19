@@ -302,10 +302,8 @@
             watch: {
                 //observar o comportamento do atributo paciente
                 paciente(valorNovo){
-                    valorNovo = valorNovo.toLowerCase()   
-                    valorNovo = valorNovo.replace('ú','u')
-                    valorNovo = valorNovo.replace('ã','a')
-                    this.lista = this.pacientes.filter(p => p.nome.toLowerCase().replace('ú','u').replace('ã','a').match(valorNovo))
+                    valorNovo = valorNovo.toLowerCase()
+                    this.lista = this.pacientes.filter(p => p.nome.toLowerCase().match(valorNovo))
                 }
             }
         }
