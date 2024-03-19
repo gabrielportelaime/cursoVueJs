@@ -60,7 +60,7 @@
         <input type="text" v-model="paciente">
         <br>
         <ul>
-            <li v-for="item in lista" v-text="item.nome"></li>
+            <li v-for="item in lista">{{item.nome + ' - ' + item.idade}}</li>
         </ul>
         <div>
             Selecionados: {{ lista.length }}
