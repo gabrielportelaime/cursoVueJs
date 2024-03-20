@@ -34,7 +34,16 @@
         <button @click="eDestaque = !eDestaque">
             <span v-text="eDestaque ? 'Remover negrito' : 'Tornar negrito'"></span>
         </button>
-    </div>
+        <p :class="[estilo2, {destaque: eDestaque, 'texto-branco': eTextoBranco}]">
+            Definindo classes com arrays
+        </p>
+        <button @click="estilo3 = ''">
+            Remover estilo 3
+        </button>
+        <button @click="eDestaque = !eDestaque">
+            Mudar destaque
+        </button>
+    </div> 
     <script>
         const vm = new Vue({
             el: '#app',
@@ -42,6 +51,9 @@
                 eVermelho: false,
                 eTextoBranco: false,
                 eDestaque: false,
+                estilo1: 'destaque',
+                estilo2: 'vermelho',
+                estilo3: 'texto-branco'
             },
             computed:{
             },
