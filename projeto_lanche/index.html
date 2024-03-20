@@ -161,8 +161,8 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col d-flex justify-content-between">
-                            <button type="button" class="btn btn-primary">Repetir pedido</button>
-                            <button type="button" class="btn btn-success">Novo pedido</button>
+                            <button type="button" class="btn btn-primary" @click="etapa = 1">Repetir pedido</button>
+                            <button type="button" class="btn btn-success" @click="novoPedido()">Novo pedido</button>
                         </div>
                     </div>
                 </div>
@@ -180,6 +180,7 @@
                 inputHamburguer: '',
                 inputNome: '',
                 inputEndereco: '',
+                novoPedidoAssincrono: null
             },
             computed:{
                 pao(){
@@ -244,8 +245,25 @@
                 confirmarPedido(){
                     if(this.inputNome && this.inputEndereco){
                         this.etapa = 3
+                        this.novoPedidoAssincrono = setTimeout(() => this.novoPedido(), 5000)
                     }else{
                         alert('Você precisa informar o seu nome e o seu endereço!')
+                    }
+                }, 
+                novoPedido(){
+                    this.etapa = 1,
+                    this.inputTipoPao = ''
+                    this.inputSaladas = []
+                    this.inputMolhos = []
+                    this.inputHamburguer = ''
+                    this.inputNome = ''
+                    this.inputEndereco = ''
+                }
+            }, 
+            watch: {
+                etapa(novoValor){
+                    if(novoValor == 1){
+                        clearTimeout(this.novoPedidoAssincrono)
                     }
                 }
             }
