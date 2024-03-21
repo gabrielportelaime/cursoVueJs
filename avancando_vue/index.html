@@ -43,6 +43,21 @@
         <button @click="eDestaque = !eDestaque">
             Mudar destaque
         </button>
+        <hr>
+        <div :style="estilo">
+            Definindo estilo com objetos
+        </div>
+        {{estilo}}
+        <hr>
+        <!-- <button @click="estilo.background = 'green'">
+            Mudar para Verde
+        </button> -->
+        <button @click="tamanhoTexto -= 5">
+            Diminuir texto
+        </button> 
+        <button @click="tamanhoTexto += 5">
+            Aumentar texto
+        </button> 
     </div> 
     <script>
         const vm = new Vue({
@@ -53,9 +68,36 @@
                 eDestaque: false,
                 estilo1: 'destaque',
                 estilo2: 'vermelho',
-                estilo3: 'texto-branco'
+                estilo3: 'texto-branco',
+                tamanhoTexto: 30,
+                // TEM QUE USAR AS ASPAS SIMPLES POR CAUSA DAS ASPAS DUPLAS EXTERNAS
+                // TEM QUE USAR ASPAS (SIMPLES OU DUPLAS) PORQUE SE NÃO HOUVER, VAI TERNTAR FAZER O BINDING COM PROPRIEDADE DE DATA
+                // SE TIVER TRAÇO NO CASO (FONT-SIZE) PODE FAZER QUE NEM NO JAVA
+                // estilo:{
+                //     background: 'blue',
+                //     width: 250 + 'px',
+                //     height: 200 + 'px',
+                //     padding: 20 + 'px',
+                //     fontSize: 20 + 'px',
+                // },
             },
             computed:{
+                estilo(){
+                    let width = Math.floor((Math.random() * 100 + 100))
+                    let height = Math.floor((Math.random() * 100 + 100))
+                    let background = 'blue'
+                    let horas = new Date().getHours()
+                    if(horas > 18){
+                        background = 'red'
+                    }
+                    return {
+                        background: background,
+                        width: width + 'px',
+                        height: height + 'px',
+                        padding: 20 + 'px',
+                        fontSize: this.tamanhoTexto + 'px',
+                    }
+                }
             },
             methods: {
             }, 
