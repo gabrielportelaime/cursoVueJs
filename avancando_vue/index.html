@@ -64,12 +64,35 @@
             <br>
             <span>Comentário:</span><textarea></textarea>
             <br>
-            <button @click="cadastrar()">Cadastrar</button>
+            <button @click.prevent="cadastrar()">Cadastrar</button>
         </form>
+        <hr>
+        {{resultado}}
+        <hr>
+        <p>
+            {{texto}}
+        </p>
+        <button @click="modificarTextoVD()">Adicionar @ (VD)</button>
+        <button onclick="modificarTexto()">Adicionar @</button>
+        <hr>
+        <div>
+            <h1>{{texto1}}</h1>
+            <p>{{texto2}}</p>
+        </div>
     </div> 
     <script>
+        function modificarTexto(){
+            let t = document.querySelectorAll('p')[2].innerText
+            t += '@'
+            document.querySelectorAll('p')[2].innerText = t
+        }
         const vm = new Vue({
-            el: '#app',
+            // el: '#app',
+            template: 
+                    `<div>
+                        <h1>{{texto1}}</h1>
+                        <p>{{texto2}}</p>
+                    </div>`,
             data: {
                 eVermelho: false,
                 eTextoBranco: false,
@@ -78,6 +101,10 @@
                 estilo2: 'vermelho',
                 estilo3: 'texto-branco',
                 tamanhoTexto: 30,
+                resultado: '',
+                texto: 'Virtual DOM ',
+                texto1: 'Template',
+                texto2: 'Formas alternativas de carregar o template',
                 // TEM QUE USAR AS ASPAS SIMPLES POR CAUSA DAS ASPAS DUPLAS EXTERNAS
                 // TEM QUE USAR ASPAS (SIMPLES OU DUPLAS) PORQUE SE NÃO HOUVER, VAI TERNTAR FAZER O BINDING COM PROPRIEDADE DE DATA
                 // SE TIVER TRAÇO NO CASO (FONT-SIZE) PODE FAZER QUE NEM NO JAVA
@@ -109,12 +136,18 @@
             },
             methods: {
                 cadastrar(){
-                    console.log(this.$refs.inputNome.value)
+                    let nome = this.$refs.inputNome.value
+                    let comentario = this.$refs.formulario[1].value
+                    this.resultado = nome +' disse '+ '"' + comentario +'"'
+                },
+                modificarTextoVD(){
+                    this.texto += '@' 
                 }
             }, 
             watch: {
             }
         })
+        vm.$mount('#app')
     </script>
 </body>
 </html>
