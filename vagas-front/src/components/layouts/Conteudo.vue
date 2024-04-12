@@ -1,6 +1,9 @@
 <template>
     <div>
-        <p>Conteúdo</p>
+        <h1>Componente Conteúdo</h1>
+        <p>Conteudo - Propriedade Style: {{ $style }}</p>
+        <div class="teste-1">Class teste-1</div>
+        <div id="teste-2">ID teste-2</div>
         <home></home>
         <publicar-vaga></publicar-vaga>
     </div>
@@ -19,4 +22,14 @@
     }
 </script>
 
-<style></style>
+<style module>
+    h1{
+        color: green;
+    }
+    .teste-1{
+        background-color: red;
+    }
+    #teste-2{
+        background-color: yellow;
+    }
+</style>

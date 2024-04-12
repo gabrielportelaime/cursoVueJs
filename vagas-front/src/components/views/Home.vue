@@ -1,6 +1,7 @@
 <template>
     <div>
-        <p>Home</p>
+        <h1>Componente Home</h1>
+        <p>Home - Propriedade Style: {{ $style }}</p>
     </div>
 </template>
 
@@ -10,4 +11,8 @@
     }
 </script>
 
-<style></style>
+<style module>
+    h1{
+        color: blue;
+    }
+</style>
